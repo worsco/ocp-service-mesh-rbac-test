@@ -81,18 +81,17 @@ cd ~/gitrepos/bookinfo/.service-mesh/service-mesh/rbac-test/
 ```
 
 ```
-oc get route kiali -n istio-system -o jsonpath='{.spec.host}' ; echo ''
+export KIALI_URL=$(oc get route jaeger -n istio-system -o jsonpath='{.spec.host}')
+echo "https://$KIALI_URL/"
 ```
 
-* Log into that URL via a web browser.
+* Log into Kiali via a web browser.
 
 ```
 cd ~/gitrepos/bookinfo/.service-mesh/service-mesh/rbac-test
 ```
 
 ```
-# This was already set previously
-export MYUSER=scottw
 find . -name '*.yml' -type f -printf '\n%p:\n' -exec sed -i "/tbox/{
 s//$MYUSER/g
 w /dev/stdout
